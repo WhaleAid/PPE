@@ -43,7 +43,6 @@ input{
     box-sizing: border-box;
   }
 .login-form {
-  min-height: 10rem;
   max-width: 50%;
   margin-left: auto;
   margin-right: auto;
@@ -85,7 +84,7 @@ input{
   margin: 1rem;
   padding: .5rem;
   transition: 250ms background ease-in;
-  width: 100;
+  width: 200;
 }
 
 .login-forgot-pass {
@@ -108,7 +107,7 @@ input{
 .login-submit {
   border: 1px solid white;
   background: transparent;
-  width: 50;
+  width: 150;
   color: white;
   display: block;
   margin: 1rem auto;

@@ -9,6 +9,10 @@
 				<input placeholder="Prenom" type="text" name="prenom" class="login-username"/><br>
 				<input placeholder="Identifiant"  type="text" name="identifiant" class="login-username"/><br>
 				<input placeholder="Mot de Passe"  type="password" name="mdp" class="login-password"/><br>
+				<input placeholder="Identifiant"  type="text" name="identifiant" class="login-username"/><br>
+				<input placeholder="Identifiant"  type="text" name="identifiant" class="login-username"/><br>
+				<input placeholder="Identifiant"  type="text" name="identifiant" class="login-username"/><br>
+				<input placeholder="Identifiant"  type="text" name="identifiant" class="login-username"/><br>
 			 	<input class="login-submit" name="register" type = "submit" value = "Valider"></a>
 			 </div>
 			<a href="login.php" class="login-forgot-pass"><div>Déjà membre? Connectez-vous</div></a>

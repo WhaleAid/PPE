@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <link href='log-in.css' rel='stylesheet' type='text/css'>
 <div style="text-align:center;margin-top:50px;fontfamily:arial;font-size:20px;">
 <h1 class="logged-text">Vous Avez Réuissi à Vous Inscrire</h1><br>
