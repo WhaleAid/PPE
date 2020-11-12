@@ -1,154 +1,201 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700);
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-
-body, html {
-  height: 100%;
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #191919;
 }
-body {
-  font-family: 'Open Sans';
-  font-weight: 100;
-  display: flex;
-  overflow: hidden;
-}
-input{
-  outline: 0 transparent solid;
-} 
-  input::-webkit-input-placeholder {
-     color: rgba(255,255,255);
-  }
-  input::-moz-placeholder {
-     color: rgba(255,255,255);  
-  }
-  input::-ms-input-placeholder {  
-     color: rgba(255,255,255);  
-  }
-  input:focus::-webkit-input-placeholder {
-    color: black;
-    background: white
-  }
-  input:focus::-moz-placeholder {
-    color: black;
-    background: white;  
-  }
-  input:focus:-ms-input-placeholder {  
-    color: black;
-    background: white;  
-  }
-  input:hover::-webkit-input-placeholder {
-    color: white;
-    border-bottom: 1px white;
-  }
-  input:hover::-moz-input-placeholder {
-    color: white;
-    box-sizing: border-box;
-  }
 .login-form {
-  max-width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 350;
-}
-.login-form2 {
-  margin: auto;
-}
-.login-text {
-  color: white;
-  font-size: 1.5rem;
-  margin: 0 auto;
-  max-width: 50%;
-  padding: .5rem;
+  width: 300px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #000000;
   text-align: center;
+  border: 2px solid #3498db;
+  border-radius: 20px;
+  box-shadow: 5px 5px #3498db;
 }
 
-.logged-text {
-  width: 600;
+.login-form h1{
   color: white;
-  font-size: 3rem;
-  margin: 250 650;
-  padding: .5rem;
-}
-.logged-text2 {
-  width: 600;
-  color: white;
-  font-size: 1.5rem;
-  margin: auto;
-  max-width: 50%;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
-.login-username, .login-password {
-  background: transparent;
-  border: 0 solid;
-  border-bottom: 1px solid rgba(white, .5);
-  color: white;
+.login-form input[type = "text"],.login-form input[type = "password"]{
+  border:0;
+  background: none;
   display: block;
-  margin: 1rem;
-  padding: .5rem;
-  transition: 250ms background ease-in;
-  width: 200;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
 }
+
+.login-form input[type = "text"]:focus,.login-form input[type = "password"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.login-form input[type = "submit"], .login-form input[type = "submit-reset"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.login-form input[type = "submit"]:hover, .login-form input[type = "submit-reset"]:hover{
+  background: #2ecc71;
+}
+
 
 .login-forgot-pass {
-  //border-bottom: 1px solid white;
-  bottom: 0;
-  color: white;
+  color: #14fa5d;
   cursor: pointer;
-  display: block;
   font-size: 1rem;
-  left: 0;
   opacity: 0.6;
-  padding: .5rem;
-  position: absolute;
   text-align: center;
-  width: 100%;
 }
 .login-forgot-pass:hover {
     opacity: 1;
   }
-.login-submit {
-  border: 1px solid white;
-  background: transparent;
-  width: 150;
+
+/*SIGN UP*/
+.login-form2 {
+  width: 300px;
+  padding: 40px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #000000;
+  text-align: center;
+  border: 2px solid #3498db;
+  border-radius: 20px;
+  box-shadow: 5px 5px #3498db;
+}
+.logo {
+  width: 20%;
+  margin-left: 100px;
+  margin-top: 250px;
+}
+.login-form2 h1{
   color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.login-form2 input[type = "text"],.login-form2 input[type = "email"],.login-form2 input[type = "password"]{
+  border:0;
+  background: none;
   display: block;
-  margin: 1rem auto;
-  min-width: 1px;
-  padding: .25rem;
-  transition: 250ms background ease-in;
+  margin: 1px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
 }
 
-.login-submit:hover{
-    background: white;
-    color: black;
-    transition: 250ms background ease-in;
+.login-form2 input[type = "text"]:focus,.login-form2 input[type = "password"]:focus,.login-form2 input[type = "email"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.login-form2 input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.login-form2 input[type = "submit"]:hover{
+  background: #2ecc71;
 }
 
-
-
-
-[class*=underlay] {
-  left: 0;
-  min-height: 100%;
-  min-width: 100%;
-  position: fixed;
-  top: 0;
+/*HOME PAGE*/
+.gestion-frais {
+  width: 300px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #000000;
+  text-align: center;
+  border: 2px solid #3498db;
+  border-radius: 20px;
+  box-shadow: 5px 5px #3498db;
 }
-.underlay-photo {
-  animation: hue-rotate 6s infinite;
-  background: url('https://31.media.tumblr.com/41c01e3f366d61793e5a3df70e46b462/tumblr_n4vc8sDHsd1st5lhmo1_1280.jpg');
-  background-size: cover;
-  -webkit-filter: grayscale(30%);
-  z-index: -1;
+.gestion-frais {
+  border-spacing: 3px;
 }
-.underlay-black {
-  background: rgba(0,0,0,0.7);
-  z-index: -1;
+.profile-img {
+  width: 7%;
+  margin: 10px;
+  display: inline-block;
 }
+.profil{
 
-@keyframes hue-rotate {
-  from {
-    -webkit-filter: grayscale(30%) hue-rotate(0deg);
-  }
-  to {
-    -webkit-filter: grayscale(30%) hue-rotate(360deg);
-  }
+}
+.profil p{
+  color: white;
+  margin: 5px;
+}
+.gestion-frais input[type = "text"], select{
+  border:0;
+  background: none;
+  display: block;
+  margin: 1px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+option{
+  color: white;
+  background-color: black;
+}
+.gestion-frais h1{
+  color: white;
+}
+.logopfp {
+  margin-top: : 20px;
+  float: right;
+  display: inline-block;
+  width: 20%;
+}
+.radio-title{
+  color: white;
+}
+.radio-label{
+  color: white;
 }
