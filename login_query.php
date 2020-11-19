@@ -26,7 +26,6 @@ if(isset($_POST['identifiant'])) {
 
 	if(password_verify($password, $rows['mdp'])) {
 		$_SESSION['USER'] = $user;
-		$_SESSION['ID'] = $id;
 		header("location: home.php");
 	}else{
 		$errmsg_arr[] = 'Identifiant et mot de passe non trouvés';

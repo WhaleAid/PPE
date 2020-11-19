@@ -143,13 +143,8 @@ body{
   padding: 40px;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
   background: #000000;
   text-align: center;
-  border: 2px solid #3498db;
-  border-radius: 20px;
-  box-shadow: 5px 5px #3498db;
 }
 .gestion-frais {
   border-spacing: 3px;
@@ -160,7 +155,6 @@ body{
   display: inline-block;
 }
 .profil{
-
 }
 .profil p{
   color: white;
@@ -169,7 +163,6 @@ body{
 .gestion-frais input[type = "text"], select{
   border:0;
   background: none;
-  display: block;
   margin: 1px auto;
   text-align: center;
   border: 2px solid #3498db;
@@ -198,4 +191,18 @@ option{
 }
 .radio-label{
   color: white;
+}
+.logged-text{
+  color: white;
+}
+.titre { 
+  width : 180 ; 
+  clear:left;
+  float:left; 
+} 
+      
+.zone {
+ float : left;
+ color:white;
+ margin: 5px;
 }

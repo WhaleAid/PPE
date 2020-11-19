@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<script src="https://www.google.com/recaptcha/api.js?render=6LfhzeQZAAAAAFt_wrE8Bh9ozp3THRsyrs9b7o8l"></script>
+	</head>
 	<body>
 		<link href='log-in.css' rel='stylesheet' type='text/css'>
 			<img class ="logo" src="logo.png">
@@ -17,6 +20,12 @@
 			 	<a href="login.php" class="login-forgot-pass"><div>Déjà membre? Connectez-vous</div></a>
 			 </div>
 		</form>
-
+		<script>
+  		grecaptcha.ready(function() {
+     	grecaptcha.execute('put your site key here', {action: 'homepage'}).then(function(token) {
+        // pass the token to the backend script for verification
+      });
+  });
+  </script>
 	</body>
 </html>

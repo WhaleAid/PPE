@@ -19,7 +19,6 @@ $dbpass = "root";
     $chars = '0123456789abcdefghijklmnopqrstuvwxyz';
     $id = substr(str_shuffle($chars), 0, 3);
 // Hashing
-
     $pass = password_hash($mdp, PASSWORD_DEFAULT);
 
   // set the PDO error mode to exception
