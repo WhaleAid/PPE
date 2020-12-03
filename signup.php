@@ -22,7 +22,7 @@
 		</form>
 		<script>
   		grecaptcha.ready(function() {
-     	grecaptcha.execute('put your site key here', {action: 'homepage'}).then(function(token) {
+     	grecaptcha.execute('6LfhzeQZAAAAAFt_wrE8Bh9ozp3THRsyrs9b7o8l', {action: 'homepage'}).then(function(token) {
         // pass the token to the backend script for verification
       });
   });

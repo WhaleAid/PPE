@@ -1,48 +1,79 @@
 <?php
 session_start();
-$user = $_SESSION['USER'];?>
+$user = $_SESSION['USER'];
+?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>PROFIL</title>
-		<link href='log-in.css' rel='stylesheet' type='text/css'>
-		<div class="profil">
-			<img class="profile-img" src="pfp.png">
-			<img class="logopfp" src="logo.png">
-			<p>Bonjour, <?php echo $_SESSION['USER'];?></p>	
-		</div>
+		<link href='home.css' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
-		<div class="gestion-frais">
-			<h1>SAISIE DE FRAIS</h1>
-			<form method="POST" action="fichefrais.php">
-			<table>
-					<tr>
-						<select placeholder="Mois" name="Mois">
-						<option disabled selected value> -- Mois -- </option>
-						<option value="Janvier">Janvier</option>
-						<option value="Férvier">Férvier</option>
-						<option value="Mars">Mars</option>
-						<option value="Avril">Avril</option>
-						<option value="Mai">Mai</option>
-						<option value="Juin">Juin</option>
-						<option value="Juillet">Juillet</option>
-						<option value="Août">Août</option>
-						<option value="Septembre">Septembre</option>
-						<option value="Octobre">Octobre</option>
-						<option value="Novembre">Novembre</option>
-						<option value="Décembre">Décembre</option>
-					</tr>
-					<tr><input class="inputs" placeholder="Repas midi" type="text" name="repasmidi"></tr>
-					<tr><input class="inputs" placeholder="Nuité" type="text" name="nuite"></tr>
-					<tr><input class="inputs" placeholder="Etape" type="text" name="etape"></tr>
-					
-					<tr><input class="inputs" placeholder="Km" type="text" name="km"></tr>
-					<tr><p class="radio-title" style="text-decoration: underline;">Situation</p></tr>
-					<tr><label class="radio-label">Enregistré</label><input class="inputs" type="radio" name="situation" checked></tr>
-					<tr><label class="radio-label">Remboursé</label><input class="inputs" type="radio" name="situation"></tr>
-					<tr><label class="radio-label">Validé</label><input class="inputs" type="radio" name="situation"></tr>
+		
+		<div class="container">
+    <div class="main-body">
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                    <img src="pfp.png" alt="Admin" class="rounded-circle" width="150">
+                    <img src="logo.png" alt="Admin" class="rounded-circle-right" width="150">
+                    <div class="mt-3">
+                      <h4>Bonjour, <?php echo $_SESSION['USER'];?></h4>
+                    </div>
+                    <div class="titre">
+                    	<h1>SAISIE DE FRAIS</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <nav class="main-menu">
+            <ol class="menu">
+              <li class="menu-item"><a href="index.html">Saisie Frais</a></li>
+              <li class="menu-item"><a href="javascript:void(0)">Consulter Frais</a></li>
+              <li class="menu-item"><a href="#"></a></li>
+            </ol>
+          </nav>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+					<form method="POST" action="fichefrais.php">
+					<table>
+							<tr>
+								<td>Mois : </td><td><select name="mois">
+								<option disabled selected value> -- Mois -- </option>
+								<option value="1">Janvier</option>
+								<option value="2">Férvier</option>
+								<option value="3">Mars</option>
+								<option value="4">Avril</option>
+								<option value="5">Mai</option>
+								<option value="6">Juin</option>
+								<option value="7">Juillet</option>
+								<option value="8">Août</option>
+								<option value="9">Septembre</option>
+								<option value="10">Octobre</option>
+								<option value="11">Novembre</option>
+								<option value="12">Décembre</option>
+							</tr></select></td>
+							<tr><td>Forfait Etape : </td><td><input class="inputs" type="text" name="etape"></td></tr>
+							<tr><td>Frais Kilométrique : </td><td><input class="inputs" type="text" name="km"></td></tr>
+							<tr><td>Nuité Hotel: </td><td><input class="inputs" type="text" name="nuite"></td></tr>
+							<tr><td>Repas Restaurant : </td><td><input class="inputs" type="text" name="repas"></td></tr>
+							<tr><td><input name="login" type = "submit" value = "Valider"></a></td></tr>
+							<!-- <tr><td><h3 class="radio-title" style="text-decoration: underline;">Situation</h3></td></tr>
+							<tr><td><label class="radio-label">Enregistré</label><input class="inputs" type="radio" name="situation" checked></td></tr>
+							<tr><td><label class="radio-label">Remboursé</label><input class="inputs" type="radio" name="situation"></td></tr>
+							<tr><td><label class="radio-label">Validé</label><input class="inputs" type="radio" name="situation"></td></tr> -->
 		</div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    
 		</div>
 	</body>
 </html>
