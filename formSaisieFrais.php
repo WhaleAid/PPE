@@ -6,14 +6,14 @@ $user = $_SESSION['USER'];?>
 	<title>Gestion des frais de visite</title>	
 	<link href='log-in.css' rel='stylesheet' type='text/css'>
 	<script language="javascript">
-        function ajoutLigne( pNumero){//ajoute une ligne de produits/qté à la div "lignes"     
+        function ajoutLigne( pNumero){//ajoute une ligne de produits/qtï¿½ ï¿½ la div "lignes"     
 			//masque le bouton en cours
 			document.getElementById("but"+pNumero).setAttribute("hidden","true");	
-			pNumero++;										//incrémente le numéro de ligne
-            var laDiv=document.getElementById("lignes");	//récupère l'objet DOM qui contient les données
-			var titre = document.createElement("label") ;	//crée un label
-			laDiv.appendChild(titre) ;						//l'ajoute à la DIV
-			titre.setAttribute("class","titre") ;			//définit les propriétés
+			pNumero++;										//incrï¿½mente le numï¿½ro de ligne
+            var laDiv=document.getElementById("lignes");	//rï¿½cupï¿½re l'objet DOM qui contient les donnï¿½es
+			var titre = document.createElement("label") ;	//crï¿½e un label
+			laDiv.appendChild(titre) ;						//l'ajoute ï¿½ la DIV
+			titre.setAttribute("class","titre") ;			//dï¿½finit les propriï¿½tï¿½s
 			titre.innerHTML= "   "+ pNumero + " : ";
 			//zone our la date du frais
 			var ladate = document.createElement("input");
@@ -22,7 +22,7 @@ $user = $_SESSION['USER'];?>
 			ladate.setAttribute("size","12"); 
 			ladate.setAttribute("class","zone");
 			ladate.setAttribute("type","text");	
-			//zone de saisie pour un nouveau libellé			
+			//zone de saisie pour un nouveau libellï¿½			
 			var libelle = document.createElement("input");
 			laDiv.appendChild(libelle);
 			libelle.setAttribute("name","FRA_AUT_LIB"+pNumero);
@@ -38,7 +38,7 @@ $user = $_SESSION['USER'];?>
 			mont.setAttribute("type","text");			
 			var bouton = document.createElement("input");
 			laDiv.appendChild(bouton);
-			//ajoute une gestion évenementielle en faisant évoluer le numéro de la ligne
+			//ajoute une gestion ï¿½venementielle en faisant ï¿½voluer le numï¿½ro de la ligne
 			bouton.setAttribute("onClick","ajoutLigne("+ pNumero +");");
 			bouton.setAttribute("type","button");
 			bouton.setAttribute("value","+");
@@ -58,7 +58,7 @@ $user = $_SESSION['USER'];?>
 		<h1> Saisie </h1>
 		<label class="titre">PERIODE D'ENGAGEMENT :</label>
 			<label style="float:left;">Mois (2 chiffres) : </label><input type="text" size="4" name="FRA_MOIS" class="zone" />
-			<label style="float:left;">&nbsp;Année (4 chiffres) : </label><input type="text" size="4" name="FRA_AN" class="zone" />
+			<label style="float:left;">&nbsp;Annï¿½e (4 chiffres) : </label><input type="text" size="4" name="FRA_AN" class="zone" />
 		<p class="titre" /><div style="clear:left;"><h2>Frais au forfait</h2></div>
 		<label class="titre">Repas midi :</label><input type="text" size="2" name="FRA_REPAS" class="zone" />
 		<label class="titre">Nuitees :</label><input type="text" size="2" name="FRA_NUIT" class="zone" />

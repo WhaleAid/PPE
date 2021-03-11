@@ -1,5 +1,4 @@
 <?php
-<?php
 session_start();
 $dbhost = "localhost";
 $dbname = "gsb_frais";

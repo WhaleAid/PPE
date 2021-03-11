@@ -10,8 +10,6 @@ $dbpass = "root";
 // database connection
 $conn = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// new data
-
 // query
 if(isset($_POST['identifiant'])) {
 	$user = $_POST['identifiant'];

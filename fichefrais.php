@@ -18,23 +18,17 @@ $sql1 = "SELECT * FROM visiteur WHERE login= ?";
 
 	$id = $rows['id'];
 	$mois = $_POST['mois'];
-  	$etape = $_POST['etape'];
-	$km = $_POST['km'];
-	$nuite = $_POST['nuite'];
-  $repas = $_POST['repas'];
-
+  	$nbrjust = $_POST['nbjust'];
+	$mtn = $_POST['mtnval'];
+	$date = $_POST['datemodif'];
+    $etat = $_POST['etat'];
   // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-/*  $sql = "INSERT INTO lignefraisforfait (idVisiteur, mois, idFraisForfait, quantite) VALUES ('$id, $mois, 'ETP' $etape')
-  		INSERT INTO lignefraisforfait (idVisiteur, mois, idFraisForfait, quantite) VALUES ('$id, $mois, 'KM' $km')
-  		INSERT INTO lignefraisforfait (idVisiteur, mois, idFraisForfait, quantite) VALUES ('$id, $mois, 'NUI' $nuite')
-  		INSERT INTO lignefraisforfait (idVisiteur, mois, idFraisForfait, quantite) VALUES ('$id, $mois, 'REP' $repas');";
-  // use exec() because no results are returned*/
-  $conn->exec("INSERT INTO lignefraisforfait (idVisiteur, mois, idFraisForfait, quantite) VALUES ('$id', '$mois', (SELECT id from fraisforfait WHERE libelle = 'Forfait Etape'), '$etape');");
-
-/*  $conn->exec("INSERT INTO lignefraisforfait (idVisiteur, mois, idFraisForfait, quantite) VALUES((SELECT id FROM visiteur WHERE login = $user), '$mois', (SELECT id from fraisforfait WHERE libelle = 'Frais Kilométrique'), '$km'), 
-  $conn->exec('$id', '$mois', (SELECT id from fraisforfait WHERE libelle = 'Nuitée Hôtel'), '$nuite'),
-  $conn->exec'$id', '$mois', (SELECT id from fraisforfait WHERE libelle = 'Repas Restaurant'), '$repas';");*/
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "INSERT INTO fichefrais (idVisiteur, mois, nbJustificatifs, montantValide, dateModif, idEtat) VALUES ('$id', '$mois', '$nbrjust', '$mtn', '$date', '$etat');
+  		INSERT INTO fichefrais (idVisiteur, mois, nbJustificatifs, montantValide, dateModif, idEtat) VALUES ('$id', '$mois', '$nbrjust', '$mtn', '$date', '$etat');
+  		INSERT INTO fichefrais (idVisiteur, mois, nbJustificatifs, montantValide, dateModif, idEtat) VALUES ('$id', '$mois', '$nbrjust', '$mtn', '$date', '$etat');
+  		INSERT INTO fichefrais (idVisiteur, mois, nbJustificatifs, montantValide, dateModif, idEtat) VALUES ('$id', '$mois', '$nbrjust', '$mtn', '$date', '$etat');";
+  $conn->exec($sql);
   header('location: home.php');
   exit();
 ?>

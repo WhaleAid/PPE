@@ -29,7 +29,7 @@ $user = $_SESSION['USER'];?>
 		<p class="titre" />
 		<div style="clear:left;"><h2>Frais au forfait </h2></div>
 		<table style="color:white;" border="1">
-			<tr><th>Repas midi</th><th>Nuitée </th><th>Etape</th><th>Km </th><th>Situation</th></tr>
+			<tr><th>Repas midi</th><th>Nuitï¿½e </th><th>Etape</th><th>Km </th><th>Situation</th></tr>
 			<tr align="center"><td width="80" ><input type="text" size="3" name="repas"/></td>
 				<td width="80"><input type="text" size="3" name="nuitee"/></td> 
 				<td width="80"> <input type="text" size="3" name="etape"/></td>
@@ -45,7 +45,7 @@ $user = $_SESSION['USER'];?>
 		
 		<p class="titre" /><div style="clear:left;"><h2>Hors Forfait</h2></div>
 		<table style="color:white;" border="1">
-			<tr><th>Date</th><th>Libellé </th><th>Montant</th><th>Situation</th></tr>
+			<tr><th>Date</th><th>Libellï¿½ </th><th>Montant</th><th>Situation</th></tr>
 			<tr align="center"><td width="100" ><input type="text" size="12" name="hfDate1"/></td>
 				<td width="220"><input type="text" size="30" name="hfLib1"/></td> 
 				<td width="90"> <input type="text" size="10" name="hfMont1"/></td>

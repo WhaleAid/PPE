@@ -4,13 +4,12 @@ $user = $_SESSION['USER'];
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>PROFIL</title>
 	<link href='home.css' rel='stylesheet' type='text/css'>
 </head>
-
 <body>
-
 	<div class="container">
 		<div class="main-body">
 			<div class="row gutters-sm">
@@ -22,30 +21,31 @@ $user = $_SESSION['USER'];
 							<div class="mt-3">
 								<h4>Bonjour, <?php echo $_SESSION['USER']; ?></h4>
 							</div>
+							
 						</div>
 					</div>
 				</div>
 			</div>
 			<nav class="main-menu">
 				<ol class="menu">
-					<li class="menu-item-active"><a href="home.php">Saisie FicheFrais</a></li>
-					<li class="menu-item-normal"><a href="home-ligne.php">Saisie ligne Frais</a></li>
-					<li class="menu-item-normal"><a href="home-horsforfait.php">Saisie Frais Hors Forfait</a></li>
-					<li class="menu-item-normal"><a href="consulterfrais.php">Consulter Frais</a></li>
+					<li class="menu-item-normal"><a href="home.php">Saisie FicheFrais</a></li>
+					<li class="menu-item-active"><a href="home-ligne.php">Saisie ligne Frais</a></li>
+                    <li class="menu-item-normal"><a href="home-horsforfait.php">Saisie Frais Hors Forfait</a></li>
+                    <li class="menu-item-normal"><a href="consulterfrais.php">Consulter Frais</a></li>
 				</ol>
 			</nav>
 			<div class="col-md-8">
 				<div class="card mb-3">
 					<div class="card-body">
 						<div class="row">
-						<div class="titre">
-								<h1>SAISIE DE FRAIS</h1>
+                        <div class="titre">
+								<h1>SAISIE DE LIGNE FRAIS</h1>
 							</div>
-							<form method="POST" action="fichefrais.php">
+							<form method="POST" action="lignefichefrais.php">
 								<table>
 									<tr>
 										<td>Mois : </td>
-										<td><select name="mois" required>
+										<td><select name="mois" >
 												<option disabled selected value> -- Mois -- </option>
 												<option value="1">Janvier</option>
 												<option value="2">Férvier</option>
@@ -61,37 +61,29 @@ $user = $_SESSION['USER'];
 												<option value="12">Décembre</option>
 									</tr></select></td>
 									<tr>
-										<td>Nombres de justificatifs : </td>
-										<td><input class="inputs" type="text" name="nbjust"></td>
+										<td>Forfait Etape : </td>
+										<td><input class="inputs" type="text" name="etape"></td>
 									</tr>
 									<tr>
-										<td>MontantValide : </td>
-										<td><input class="inputs" type="text" name="mtnval"></td>
+										<td>Frais Kilométrique : </td>
+										<td><input class="inputs" type="text" name="km"></td>
 									</tr>
 									<tr>
-										<td>Date de modification : </td>
-										<td><input class="inputs" type="date" name="datemodif"></td>
+										<td>Nuité Hotel: </td>
+										<td><input class="inputs" type="text" name="nuite"></td>
 									</tr>
 									<tr>
-										<td>Etat de la fiche : </td>
-										<td><select name="etat" required>
-												<option disabled selected value> -- Etat -- </option>
-												<option value="CL">Saisie clôturée</option>
-												<option value="CR">Fiche créée, saisie en cours</option>
-												<option value="RB">Remboursé</option>
-												<option value="VA">Validé et mise en paiement</option>
-									</tr></select></td>
-									<tr>
+										<td>Repas Restaurant : </td>
+										<td><input class="inputs" type="text" name="repas"></td>
+									</tr>
 									<tr>
 										<td colspan="2"><input name="login" type="submit" value="Valider"></a></td>
-									</tr>
-									</tr>
+                                    </tr>
 								</table>
 								</form>
-									<!-- <tr><td><h3 class="radio-title" style="text-decoration: underline;">Situation</h3></td></tr>
-							<tr><td><label class="radio-label">Enregistré</label><input class="inputs" type="radio" name="situation" checked></td></tr>
-							<tr><td><label class="radio-label">Remboursé</label><input class="inputs" type="radio" name="situation"></td></tr>
-							<tr><td><label class="radio-label">Validé</label><input class="inputs" type="radio" name="situation"></td></tr> -->
+					</div>
+				</div>
+			</div>	
 						</div>
 					</div>
 				</div>
