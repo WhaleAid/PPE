@@ -2,10 +2,10 @@
 -- version 4.5.4.1
 -- http://www.phpmyadmin.net
 --
--- Client :  localhost
--- Généré le :  Jeu 11 Mars 2021 à 14:20
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.18
+-- Host: localhost
+-- Generation Time: May 04, 2021 at 05:19 PM
+-- Server version: 5.7.11
+-- PHP Version: 7.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `gsb_frais`
+-- Database: `gsb_frais`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `etat`
+-- Table structure for table `etat`
 --
 
 CREATE TABLE `etat` (
@@ -32,7 +32,7 @@ CREATE TABLE `etat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `etat`
+-- Dumping data for table `etat`
 --
 
 INSERT INTO `etat` (`id`, `libelle`) VALUES
@@ -44,7 +44,7 @@ INSERT INTO `etat` (`id`, `libelle`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fichefrais`
+-- Table structure for table `fichefrais`
 --
 
 CREATE TABLE `fichefrais` (
@@ -57,28 +57,30 @@ CREATE TABLE `fichefrais` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `fichefrais`
+-- Dumping data for table `fichefrais`
 --
 
 INSERT INTO `fichefrais` (`idVisiteur`, `mois`, `nbJustificatifs`, `montantValide`, `dateModif`, `idEtat`) VALUES
-('8wn', '1', 10, '450.00', '2020-12-10', 'RB'),
-('8wn', '2', 15, '350.00', '2020-02-12', 'VA'),
-('jsn', '2', 5, '350.00', '2021-03-23', 'CL');
+('5r2', '2', 2, '150.00', '2020-02-09', 'RB'),
+('a17', '4', 12, NULL, '2021-04-26', 'CR'),
+('chn', '1', 5, '250.00', '2077-01-12', 'CL'),
+('usb', '1', 10, '250.00', '2021-04-25', 'CR'),
+('usb', '2', 4, NULL, '2021-04-26', 'CR');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fraisforfait`
+-- Table structure for table `fraisforfait`
 --
 
 CREATE TABLE `fraisforfait` (
-  `id` char(3) NOT NULL,
-  `libelle` char(20) DEFAULT NULL,
+  `id` char(3) CHARACTER SET latin1 NOT NULL,
+  `libelle` char(20) CHARACTER SET latin1 DEFAULT NULL,
   `montant` decimal(5,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `fraisforfait`
+-- Dumping data for table `fraisforfait`
 --
 
 INSERT INTO `fraisforfait` (`id`, `libelle`, `montant`) VALUES
@@ -90,7 +92,7 @@ INSERT INTO `fraisforfait` (`id`, `libelle`, `montant`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `lignefraisforfait`
+-- Table structure for table `lignefraisforfait`
 --
 
 CREATE TABLE `lignefraisforfait` (
@@ -101,23 +103,27 @@ CREATE TABLE `lignefraisforfait` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `lignefraisforfait`
+-- Dumping data for table `lignefraisforfait`
 --
 
 INSERT INTO `lignefraisforfait` (`idVisiteur`, `mois`, `idFraisForfait`, `quantite`) VALUES
-('8wn', '1', 'ETP', 5),
-('8wn', '1', 'KM', 4),
-('8wn', '1', 'NUI', 2),
-('8wn', '1', 'REP', 3),
-('8wn', '2', 'ETP', 3),
-('8wn', '2', 'KM', 4),
-('8wn', '2', 'NUI', 6),
-('8wn', '2', 'REP', 8);
+('chn', '1', 'ETP', 5),
+('chn', '1', 'KM', 35),
+('chn', '1', 'NUI', 8),
+('chn', '1', 'REP', 12),
+('usb', '1', 'ETP', 5),
+('usb', '1', 'KM', 4),
+('usb', '1', 'NUI', 7),
+('usb', '1', 'REP', 12),
+('usb', '2', 'ETP', 5),
+('usb', '2', 'KM', 6),
+('usb', '2', 'NUI', 7),
+('usb', '2', 'REP', 8);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `lignefraishorsforfait`
+-- Table structure for table `lignefraishorsforfait`
 --
 
 CREATE TABLE `lignefraishorsforfait` (
@@ -130,17 +136,17 @@ CREATE TABLE `lignefraishorsforfait` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `lignefraishorsforfait`
+-- Dumping data for table `lignefraishorsforfait`
 --
 
 INSERT INTO `lignefraishorsforfait` (`id`, `idVisiteur`, `mois`, `libelle`, `date`, `montant`) VALUES
-(6, '8wn', '1', 'cadeau', '2020-01-06', '120.00'),
-(7, '8wn', '2', 'telephone', '2020-02-12', '30.00');
+(7, 'chn', '1', 'Cadeau', '2077-01-25', '350.00'),
+(8, 'usb', '1', 'transport', '2021-04-04', '25.00');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `visiteur`
+-- Table structure for table `visiteur`
 --
 
 CREATE TABLE `visiteur` (
@@ -154,126 +160,127 @@ CREATE TABLE `visiteur` (
   `cp` char(5) DEFAULT NULL,
   `ville` char(30) DEFAULT NULL,
   `dateEmbauche` date DEFAULT NULL,
-  `Portrait` varchar(50) NOT NULL
+  `portrait` varchar(250) NOT NULL,
+  `comptable` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `visiteur`
+-- Dumping data for table `visiteur`
 --
 
-INSERT INTO `visiteur` (`id`, `nom`, `prenom`, `login`, `email`, `mdp`, `adresse`, `cp`, `ville`, `dateEmbauche`, `Portrait`) VALUES
-('0ko', 'aze', 'aze', 'aze', 'aze@g.fr', '$2y$10$bjxfLu1aKrHngsju/XQZN.W02XSJv6aCu.3bcxVxmQv2YmlV96Bdm', 'paname', '75000', 'paname', '2020-11-12', ''),
-('175', 'blabla', 'blablal', 'bla145', 'testbla@gmail.com', '$2y$10$MfVPqKBI6Zgcv.hzq6LsiuaeLqkerr6LaqqAMZh71jr1NEPrHxwdi', '148 rue avignon', '45879', 'new york', '2020-11-19', ''),
-('2uz', 'blabla', 'blablal', 'bla145', 'testbla@gmail.com', '$2y$10$JFyJ7K/CiWdFC3xDsZjpBOblIwAiIkETcymI/FGxd5Ti8eY.RClb6', '148 rue avignon', '45879', 'new york', '2020-11-19', ''),
-('3pc', 'blabla', 'blablal', 'bla145', 'testbla@gmail.com', '$2y$10$j/ZdVh17lpCoJGifOVeg5e.L7j3eg3hob.K9EvQ54k29sfZ97hgpa', '148 rue avignon', '45879', 'new york', '2020-11-19', ''),
-('8wn', 'John', 'Doe', 'admin', 'admin@mail.com', '$2y$10$7UHVy6vDWuO1lCTiEMMQ3exRLVqt7DnEEx.pmxGEtFBzhf56DXcYW', '14 rue bla', '75200', 'paris', '2020-12-03', ''),
-('a131', 'Villechalane', 'Louis', 'lvillachane', '', 'jux7g', '8 rue des Charmes', '46000', 'Cahors', '2005-12-21', ''),
-('a17', 'Andre', 'David', 'dandre', '', 'oppg5', '1 rue Petit', '46200', 'Lalbenque', '1998-11-23', ''),
-('a55', 'Bedos', 'Christian', 'cbedos', '', 'gmhxd', '1 rue Peranud', '46250', 'Montcuq', '1995-01-12', ''),
-('a93', 'Tusseau', 'Louis', 'ltusseau', '', 'ktp3s', '22 rue des Ternes', '46123', 'Gramat', '2000-05-01', ''),
-('b13', 'Bentot', 'Pascal', 'pbentot', '', 'doyw1', '11 allée des Cerises', '46512', 'Bessines', '1992-07-09', ''),
-('b16', 'Bioret', 'Luc', 'lbioret', '', 'hrjfs', '1 Avenue gambetta', '46000', 'Cahors', '1998-05-11', ''),
-('b19', 'Bunisset', 'Francis', 'fbunisset', '', '4vbnd', '10 rue des Perles', '93100', 'Montreuil', '1987-10-21', ''),
-('b25', 'Bunisset', 'Denise', 'dbunisset', '', 's1y1r', '23 rue Manin', '75019', 'paris', '2010-12-05', ''),
-('b28', 'Cacheux', 'Bernard', 'bcacheux', '', 'uf7r3', '114 rue Blanche', '75017', 'Paris', '2009-11-12', ''),
-('b34', 'Cadic', 'Eric', 'ecadic', '', '6u8dc', '123 avenue de la République', '75011', 'Paris', '2008-09-23', ''),
-('b4', 'Charoze', 'Catherine', 'ccharoze', '', 'u817o', '100 rue Petit', '75019', 'Paris', '2005-11-12', ''),
-('b50', 'Clepkens', 'Christophe', 'cclepkens', '', 'bw1us', '12 allée des Anges', '93230', 'Romainville', '2003-08-11', ''),
-('b59', 'Cottin', 'Vincenne', 'vcottin', '', '2hoh9', '36 rue Des Roches', '93100', 'Monteuil', '2001-11-18', ''),
-('c14', 'Daburon', 'François', 'fdaburon', '', '7oqpv', '13 rue de Chanzy', '94000', 'Créteil', '2002-02-11', ''),
-('c3', 'De', 'Philippe', 'pde', '', 'gk9kx', '13 rue Barthes', '94000', 'Créteil', '2010-12-14', ''),
-('c54', 'Debelle', 'Michel', 'mdebelle', '', 'od5rt', '181 avenue Barbusse', '93210', 'Rosny', '2006-11-23', ''),
-('d13', 'Debelle', 'Jeanne', 'jdebelle', '', 'nvwqq', '134 allée des Joncs', '44000', 'Nantes', '2000-05-11', ''),
-('d51', 'Debroise', 'Michel', 'mdebroise', '', 'sghkb', '2 Bld Jourdain', '44000', 'Nantes', '2001-04-17', ''),
-('djm', 'bla', 'blabl', 'blabla123', 'hello@test.com', '$2y$10$Gj0ZTPVY0ilF03MUX6fTG.4QQugmnn2WseU8tslNEEaRJj1D7fm1K', '148 rue avignon', '75100', 'paris', '2020-11-19', ''),
-('e22', 'Desmarquest', 'Nathalie', 'ndesmarquest', '', 'f1fob', '14 Place d Arc', '45000', 'Orléans', '2005-11-12', ''),
-('e24', 'Desnost', 'Pierre', 'pdesnost', '', '4k2o5', '16 avenue des Cèdres', '23200', 'Guéret', '2001-02-05', ''),
-('e39', 'Dudouit', 'Frédéric', 'fdudouit', '', '44im8', '18 rue de l église', '23120', 'GrandBourg', '2000-08-01', ''),
-('e49', 'Duncombe', 'Claude', 'cduncombe', '', 'qf77j', '19 rue de la tour', '23100', 'La souteraine', '1987-10-10', ''),
-('e5', 'Enault-Pascreau', 'Céline', 'cenault', '', 'y2qdu', '25 place de la gare', '23200', 'Gueret', '1995-09-01', ''),
-('e52', 'Eynde', 'Valérie', 'veynde', '', 'i7sn3', '3 Grand Place', '13015', 'Marseille', '1999-11-01', ''),
-('f21', 'Finck', 'Jacques', 'jfinck', '', 'mpb3t', '10 avenue du Prado', '13002', 'Marseille', '2001-11-10', ''),
-('f39', 'Frémont', 'Fernande', 'ffremont', '', 'xs5tq', '4 route de la mer', '13012', 'Allauh', '1998-10-01', ''),
-('g2j', 'test', 'test1', 'test123', 'test@gmail.com', '$2y$10$.CRwn31eiOR2DLBil1Vt0udhU2ldLnxUIjzZ/A6oOWAYfYhGFaj/W', '6584q1dqzfqz', '84516', 'izdagbjkqz', '2020-11-12', ''),
-('gvs', '', '', '', '', '', '', '', '', '2020-11-10', ''),
-('jsn', 'user_name', 'user_lastname', 'user_identifiant', 'user@mail.com', '$2y$10$N/KF09dCH075PcDqYYYsheLMuLkXsRF8lFoHPo/ameQqgnjBmQ.oi', '14 rue adresse', '75200', 'paris', '2021-03-11', ''),
-('pxq', 'test', 'test1', 'test1', 'test@gmail.com', '$2y$10$Y9jSb1qnThnKatp5rCqvfel4i.u/wJ0GoNP.up/peTanUlmFz3oCu', '6584q1dqzfqz', '84516', 'izdagbjkqz', '2020-11-12', ''),
-('tno', 'user_name', 'user_lastname', 'user_identifiant', 'user@mail.com', '$2y$10$HrgioyBbqBRINUbcf1iIC.PTjfZ9mIBorJAaeCerEQxyE2zatsPPG', '14 rue adresse', '75200', 'paris', '2021-03-11', ''),
-('uxp', '', '', '', '', '', '', '', '', '2020-11-10', ''),
-('yc6', 'admin', 'adminlast', 'admin123', 'admin123@gmail.com', '$2y$10$8YDeTxTO8zoT6Rti8rrWFeQ9Fr0nMgorxj.tdSStL1CopDV0ut8Wa', '123 test adresse', '99999', 'test', '2020-11-26', '');
+INSERT INTO `visiteur` (`id`, `nom`, `prenom`, `login`, `email`, `mdp`, `adresse`, `cp`, `ville`, `dateEmbauche`, `portrait`, `comptable`) VALUES
+('2lc', 'aiden', 'pearce', 'aiden10', 'aiden_pearce@WD.com', '$2y$10$bdARILS9T7H8CWCGsxIaBuhVqDAqfODyWB1zMJTlOX6J.9b1WmbpK', '41 mad street', '48584', 'chicago', '2020-11-11', '', 0),
+('5r2', 'admin', 'adm', 'admin', 'admin@gmail.com', '$2y$10$zjY9omX2hb9ue9X8myvA9ePubBeuvu594ausD3uiAK1a/Eu3J3BmK', '15 rue blabla', '75011', 'paris', '2020-12-05', '', 0),
+('9vy', 'Qui eu perspiciatis', 'Veritatis ullamco nu', 'Enim maxime sed cons', 'vosaca@mailinator.com', '$2y$10$PScgeHNWW6R7WtUgGtqplutgDE8Et6j0AlSy.cyUjEcOXAM5YjUJe', 'Voluptas ut harum vo', '94729', 'Aut consequat Molli', '2021-03-24', 'Enim maxime sed cons.jpg', 0),
+('a131', 'Villechalane', 'Louis', 'lvillachane', '', 'jux7g', '8 rue des Charmes', '46000', 'Cahors', '2005-12-21', '', 0),
+('a17', 'Andre', 'David', 'dandre', '', 'oppg5', '1 rue Petit', '46200', 'Lalbenque', '1998-11-23', '', 0),
+('a55', 'Bedos', 'Christian', 'cbedos', '', 'gmhxd', '1 rue Peranud', '46250', 'Montcuq', '1995-01-12', '', 0),
+('a93', 'Tusseau', 'Louis', 'ltusseau', '', 'ktp3s', '22 rue des Ternes', '46123', 'Gramat', '2000-05-01', '', 0),
+('b13', 'Bentot', 'Pascal', 'pbentot', '', 'doyw1', '11 allée des Cerises', '46512', 'Bessines', '1992-07-09', '', 0),
+('b16', 'Bioret', 'Luc', 'lbioret', '', 'hrjfs', '1 Avenue gambetta', '46000', 'Cahors', '1998-05-11', '', 0),
+('b19', 'Bunisset', 'Francis', 'fbunisset', '', '4vbnd', '10 rue des Perles', '93100', 'Montreuil', '1987-10-21', '', 0),
+('b25', 'Bunisset', 'Denise', 'dbunisset', '', 's1y1r', '23 rue Manin', '75019', 'paris', '2010-12-05', '', 0),
+('b28', 'Cacheux', 'Bernard', 'bcacheux', '', 'uf7r3', '114 rue Blanche', '75017', 'Paris', '2009-11-12', '', 0),
+('b34', 'Cadic', 'Eric', 'ecadic', '', '6u8dc', '123 avenue de la République', '75011', 'Paris', '2008-09-23', '', 0),
+('b4', 'Charoze', 'Catherine', 'ccharoze', '', 'u817o', '100 rue Petit', '75019', 'Paris', '2005-11-12', '', 0),
+('b50', 'Clepkens', 'Christophe', 'cclepkens', '', 'bw1us', '12 allée des Anges', '93230', 'Romainville', '2003-08-11', '', 0),
+('b59', 'Cottin', 'Vincenne', 'vcottin', '', '2hoh9', '36 rue Des Roches', '93100', 'Monteuil', '2001-11-18', '', 0),
+('c14', 'Daburon', 'François', 'fdaburon', '', '7oqpv', '13 rue de Chanzy', '94000', 'Créteil', '2002-02-11', '', 0),
+('c3', 'De', 'Philippe', 'pde', '', 'gk9kx', '13 rue Barthes', '94000', 'Créteil', '2010-12-14', '', 0),
+('c54', 'Debelle', 'Michel', 'mdebelle', '', 'od5rt', '181 avenue Barbusse', '93210', 'Rosny', '2006-11-23', '', 0),
+('chn', 'user', 'userr', 'user123', 'user@user.com', '$2y$10$idBMdD42t3Eh8ZjrkyCQXOF30glyMRNsntZIhriqO5WfCXPT37vwy', '147useradresse', '14789', 'usercity', '2020-12-16', '', 0),
+('d13', 'Debelle', 'Jeanne', 'jdebelle', '', 'nvwqq', '134 allée des Joncs', '44000', 'Nantes', '2000-05-11', '', 0),
+('d51', 'Debroise', 'Michel', 'mdebroise', '', 'sghkb', '2 Bld Jourdain', '44000', 'Nantes', '2001-04-17', '', 0),
+('e22', 'Desmarquest', 'Nathalie', 'ndesmarquest', '', 'f1fob', '14 Place d Arc', '45000', 'Orléans', '2005-11-12', '', 0),
+('e24', 'Desnost', 'Pierre', 'pdesnost', '', '4k2o5', '16 avenue des Cèdres', '23200', 'Guéret', '2001-02-05', '', 0),
+('e39', 'Dudouit', 'Frédéric', 'fdudouit', '', '44im8', '18 rue de l église', '23120', 'GrandBourg', '2000-08-01', '', 0),
+('e49', 'Duncombe', 'Claude', 'cduncombe', '', 'qf77j', '19 rue de la tour', '23100', 'La souteraine', '1987-10-10', '', 0),
+('e5', 'Enault-Pascreau', 'Céline', 'cenault', '', 'y2qdu', '25 place de la gare', '23200', 'Gueret', '1995-09-01', '', 0),
+('e52', 'Eynde', 'Valérie', 'veynde', '', 'i7sn3', '3 Grand Place', '13015', 'Marseille', '1999-11-01', '', 0),
+('f21', 'Finck', 'Jacques', 'jfinck', '', 'mpb3t', '10 avenue du Prado', '13002', 'Marseille', '2001-11-10', '', 0),
+('f39', 'Frémont', 'Fernande', 'ffremont', '', 'xs5tq', '4 route de la mer', '13012', 'Allauh', '1998-10-01', '', 0),
+('f4', 'Gest', 'Alain', 'agest', '', 'dywvt', '30 avenue de la mer', '13025', 'Berre', '1985-11-01', '', 0),
+('fso', 'Jones', 'Alex', 'jones_alex', 'jones.alex@gmail.com', '$2y$10$UEs2M/KEVIzyY5RlWWRlN.igOtVXvnfJKClUwc0DMhcry8n.4hH8K', '14 adresse test', '75420', 'Paris', '2021-04-26', 'jones_alex.jpg', 1),
+('ibr', 'aiden', 'pearce', 'aiden10', 'aiden_pearce@WD.com', '$2y$10$RbT53OU39EdO0o3Em1F7P.xtQPX7X/9Wv3j6HYWcsh3kkZ1G.ne.O', '41 mad street', '48584', 'chicago', '2020-11-11', '', 0),
+('iok', 'blabla', 'test', 'jeffreydah', 'admin@gmail.com', '$2y$10$BtR9qEwqhslRk4OBbjs9SuT7LWKdXBIoj0Y9hEd5sVVion.6UiFmW', '37 rue des mathurins', '75008', 'Paris', '2021-03-23', 'cd3035061d7fa18079df74d058b99914d5b2aba67ca04b1f52140ece155f7ed6.jpg', 0),
+('qlw', 'bla', 'test', 'testblabla', 'blabla@bla.com', '$2y$10$TfTYI0RpTikANB/s0qGfS.Bkk9wdP4ECMsUn4BX5Koh7Xmjs2fntm', '14 qzlij', '95844', 'new york', '2020-11-11', '', 0),
+('r0v', 'test', 'test1', 'test2', 'test@bla.com', '$2y$10$86ucoK/4ItOn6nVMMKt2feNOV2Xw6mL9lFX8IM57llpighOCNtEZa', '15 rue blabla', '48584', 'paris', '2020-11-12', '', 0),
+('usb', 'Doe', 'John', 'john_doe', 'joe.doe@gmail.com', '$2y$10$LT/91mZGt1U4QaqOpk5Ve.0pyAL90t5g380q4ewEoAU7SZ7k7ZZBC', '15 rue blabla', '87096', 'paris', '2021-03-25', 'john_doe.jpg', 0),
+('uwt', 'test', 'test1', 'test2', '', 'helloworld', '15 rue blabla', '78451', 'paris', '2020-11-11', '', 0),
+('yoi', 'hello', 'world', 'helklo', 'hello.world@gmail.com', '$2y$10$XVT.o7PHZ9fecNDw2.U8VuohwjmYhE.KC9fW000roFYT3kkfg9m1G', 'hello 123', '95412', 'paris', '2020-12-16', '', 0);
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `etat`
+-- Indexes for table `etat`
 --
 ALTER TABLE `etat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `fichefrais`
+-- Indexes for table `fichefrais`
 --
 ALTER TABLE `fichefrais`
   ADD PRIMARY KEY (`idVisiteur`,`mois`),
   ADD KEY `idEtat` (`idEtat`);
 
 --
--- Index pour la table `fraisforfait`
+-- Indexes for table `fraisforfait`
 --
 ALTER TABLE `fraisforfait`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `lignefraisforfait`
+-- Indexes for table `lignefraisforfait`
 --
 ALTER TABLE `lignefraisforfait`
   ADD PRIMARY KEY (`idVisiteur`,`mois`,`idFraisForfait`),
   ADD KEY `idFraisForfait` (`idFraisForfait`);
 
 --
--- Index pour la table `lignefraishorsforfait`
+-- Indexes for table `lignefraishorsforfait`
 --
 ALTER TABLE `lignefraishorsforfait`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idVisiteur` (`idVisiteur`,`mois`);
 
 --
--- Index pour la table `visiteur`
+-- Indexes for table `visiteur`
 --
 ALTER TABLE `visiteur`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `lignefraishorsforfait`
+-- AUTO_INCREMENT for table `lignefraishorsforfait`
 --
 ALTER TABLE `lignefraishorsforfait`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- Contraintes pour les tables exportées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `fichefrais`
+-- Constraints for table `fichefrais`
 --
 ALTER TABLE `fichefrais`
   ADD CONSTRAINT `fichefrais_ibfk_1` FOREIGN KEY (`idEtat`) REFERENCES `etat` (`id`),
   ADD CONSTRAINT `fichefrais_ibfk_2` FOREIGN KEY (`idVisiteur`) REFERENCES `visiteur` (`id`);
 
 --
--- Contraintes pour la table `lignefraisforfait`
+-- Constraints for table `lignefraisforfait`
 --
 ALTER TABLE `lignefraisforfait`
   ADD CONSTRAINT `lignefraisforfait_ibfk_1` FOREIGN KEY (`idVisiteur`,`mois`) REFERENCES `fichefrais` (`idVisiteur`, `mois`),
   ADD CONSTRAINT `lignefraisforfait_ibfk_2` FOREIGN KEY (`idFraisForfait`) REFERENCES `fraisforfait` (`id`);
 
 --
--- Contraintes pour la table `lignefraishorsforfait`
+-- Constraints for table `lignefraishorsforfait`
 --
 ALTER TABLE `lignefraishorsforfait`
   ADD CONSTRAINT `lignefraishorsforfait_ibfk_1` FOREIGN KEY (`idVisiteur`,`mois`) REFERENCES `fichefrais` (`idVisiteur`, `mois`);

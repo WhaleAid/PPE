@@ -1,4 +1,6 @@
 <?php
+include('function.php');
+
 session_start();
 $errmsg_arr = array();
 $errflag = false;

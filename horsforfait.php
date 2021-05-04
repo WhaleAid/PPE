@@ -11,12 +11,25 @@ $dbpass = "root";
 $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 
 $sql1 = "SELECT * FROM visiteur WHERE login= ?";
-	$result = $conn->prepare($sql1);
-	$result->bindParam(1, $user);
-	$result->execute();
-	$rows = $result->fetch();
-
-    $id = $rows['id'];
+$result = $conn->prepare($sql1);
+$result->bindParam(1, $user);
+$result->execute();
+$rows = $result->fetchAll();
+foreach ($rows as $usrconcerne) {
+	if ($usrconcerne['comptable'] == 1) {
+		$user = $_POST['usr'];
+		$sql = "SELECT id FROM visiteur WHERE login= ?";
+		$sth = $conn->prepare($sql);
+		$sth->bindParam(1, $user);
+		$sth->execute();
+		$result4 = $sth->fetchAll();
+		foreach($result4 as $util){
+			$id = $util['id'];
+		}
+	} else {
+		$id = $usrconcerne['id'];
+	}
+}
     $mois = $_POST['mois'];
 	$libelle = $_POST['libelle'];
     $date = $_POST['date'];  
@@ -27,4 +40,3 @@ $sql1 = "SELECT * FROM visiteur WHERE login= ?";
   $conn->exec($sql);
   header('location: home-horsforfait.php');
   exit();
-?>

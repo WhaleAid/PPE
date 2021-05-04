@@ -1,6 +1,30 @@
 <?php
 session_start();
+include('/functions.php');
 $user = $_SESSION['USER'];
+if ($_GET) {
+	$usr = $_GET['usr'];
+}
+$query = "SELECT * FROM visiteur WHERE login = '$user'";
+$sth = $conn->prepare($query);
+$sth->execute();
+$result = $sth->fetchAll();
+
+$query1 = "SELECT * FROM fichefrais F JOIN visiteur V ON F.idVisiteur = V.id WHERE V.login = '$user' AND F.idEtat = 'CR'";
+$sth1 = $conn->prepare($query1);
+$sth1->execute();
+$result1 = $sth1->fetchAll();
+
+$query2 = "SELECT login FROM visiteur WHERE comptable = 0";
+$sth2 = $conn->prepare($query2);
+$sth2->execute();
+$result2 = $sth2->fetchAll();
+
+$month = date('m');
+$day = date('d');
+$year = date('Y');
+
+$today = $year . '-' . $month . '-' . $day;
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,76 +32,147 @@ $user = $_SESSION['USER'];
 <head>
 	<title>PROFIL</title>
 	<link href='home.css' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
 </head>
 
 <body>
-
 	<div class="container">
 		<div class="main-body">
-			<div class="row gutters-sm">
+			<div class="headrow gutters-sm">
 				<div class="col-md-4 mb-3">
 					<div class="card">
-						<div class="card-body">
-							<img src="pfp.png" alt="Admin" class="rounded-circle" width="150">
-							<img src="logo.png" alt="Admin" class="rounded-circle-right" width="150">
-							<div class="mt-3">
-								<h4>Bonjour, <?php echo $_SESSION['USER']; ?></h4>
+						<div class="card-body header-card">
+							<?php
+							foreach ($result as $row => $user) { ?>
+								<div class='rounded-circle-right'>
+									<div class='param' onclick="moreinfo()">
+										<i class="bi bi-gear-fill"></i>
+									</div>
+									<img id='pfp' src="./images/profil/<?php echo $user['portrait'] ?>" alt="Admin" class="rounded-circle" width="150">
+								</div>
+								<div id='usr-info' class="user-info card">
+									<img src="./images/profil/<?php echo $user['portrait'] ?>" alt="Admin" class="rounded-circle" width="150">
+									<h4><?php echo $_SESSION['USER']; ?></h4>
+									<?php if ($user['comptable'] == 0) { ?>
+										<p>Visiteur</p>
+									<?php $comptable = 0;
+									} else { ?>
+										<p>Comptable</p>
+									<?php
+										$comptable = 1;
+									} ?>
+									<p class="email"><?php echo $user['email'] ?></p>
+									<button class="deco"><a href="logout.php">Déconnexion</a></button>
+								</div>
+							<?php } ?>
+							<div class="rounded-circle-left">
+								<img src="images/logo.png" alt="Admin" width="150">
+								<h3>GSB FRAIS</h3>
 							</div>
-							
 						</div>
 					</div>
 				</div>
 			</div>
-			<nav class="main-menu">
-				<ol class="menu">
-					<li class="menu-item-normal"><a href="home.php">Saisie FicheFrais</a></li>
-					<li class="menu-item-normal"><a href="home-ligne.php">Saisie ligne Frais</a></li>
-                    <li class="menu-item-active"><a href="home-horsforfait.php">Saisie Frais Hors Forfait</a></li>
-                    <li class="menu-item-normal"><a href="consulterfrais.php">Consulter Frais</a></li>
-				</ol>
-			</nav>
-			<div class="col-md-8">
-				<div class="card mb-3">
-					<div class="card-body">
-						<div class="row">
-                        <div class="titre">
-								<h1>SAISIE DE FRAIS HORS FORFAIT</h1>
-							</div>
-							<form method="POST" action="horsforfait.php">
-								<table> 
-                                <tr>
-										<td>Mois : </td>
-										<td><select name="mois" >
-												<option disabled selected value> -- Mois -- </option>
-												<option value="1">Janvier</option>
-												<option value="2">Férvier</option>
-												<option value="3">Mars</option>
-												<option value="4">Avril</option>
-												<option value="5">Mai</option>
-												<option value="6">Juin</option>
-												<option value="7">Juillet</option>
-												<option value="8">Août</option>
-												<option value="9">Septembre</option>
-												<option value="10">Octobre</option>
-												<option value="11">Novembre</option>
-												<option value="12">Décembre</option>
-									</tr></select></td>
-									<tr>
-										<td>Libelle : </td>
-										<td><input class="inputs" type="text" name="libelle"></td>
-									</tr>
-										<td>Date : </td>
-										<td><input class="inputs" type="date" name="date"></td>
-                                    </tr>
-                                    <tr>
-										<td>Montant : </td>
-										<td><input class="inputs" type="text" name="mtn"></td>
-									</tr>
-									<tr>
-										<td colspan="2"><input name="login" type="submit" value="Valider"></a></td>
-                                    </tr>
-								</table>
+			<div class='body-container'>
+				<div class="main-menu card">
+					<ul class="menu">
+						<li class="menu-item-normal"><a href="home.php"><i class="bi bi-pencil-square"></i>Saisie FicheFrais</a></li>
+						<li class="menu-item-normal"><a href="home-ligne.php"><i class="bi bi-pencil-square"></i>Saisie ligne Frais</a></li>
+						<li class="menu-item-active"><a href="home-horsforfait.php"><i class="bi bi-pencil-square"></i>Saisie Frais Hors Forfait</a></li>
+						<li class="menu-item-normal"><a href="home-validation.php"><i class="bi bi-file-earmark-check"></i>Validation Fiches</a></li>
+						<li class="menu-item-normal"><a href="consulterfrais.php"><i class="bi bi-file-earmark-spreadsheet-fill"></i>Consulter Frais</a></li>
+					</ul>
+				</div>
+				<div class="col-md-8">
+					<div class="card mb-3">
+						<div class="card-body">
+							<div class="row">
+								<div class="titre">
+									<h1>SAISIE DE FRAIS HORS FORFAIT</h1>
+								</div>
+								<form class='input-form' method="POST" action="horsforfait.php">
+									<div class="group">
+										<?php if ($comptable == 1) { ?>
+											<label>Visiteur : </label>
+											<select name="usr" onchange="location = this.value;">
+												<?php if (isset($usr)) { ?>
+													<option value="<?= $usr ?>"> <?= $usr ?> </option>
+												<?php } ?>
+												<?php foreach ($result2 as $user) { ?>
+													<option value="home-horsforfait.php?usr=<?= $user['login'] ?>"> <?= $user['login'] ?> </option>
+												<?php } ?>
+											</select>
+										<?php } ?>
+									</div>
+									<div class='group'>
+										<label>Mois :</label>
+										<select name="mois">
+											<option disabled selected value> -- Mois -- </option>
+											<?php
+											if (empty($result1)) { ?>
+												<option disabled> Ce Visiteur n'a pas de fiche </option>
+												<?php } else {
+												foreach ($result1 as $row1 => $month) {
+													switch ($month['mois']) {
+														case 1:
+															$moislib = 'JANVIER';
+															break;
+														case 2:
+															$moislib = 'FEVRIER';
+															break;
+														case 3:
+															$moislib = 'MARS';
+															break;
+														case 4:
+															$moislib = 'AVRIL';
+															break;
+														case 5:
+															$moislib = 'MAI';
+															break;
+														case 6:
+															$moislib = 'JUIN';
+															break;
+														case 7:
+															$moislib = 'JUILLET';
+															break;
+														case 8:
+															$moislib = 'AOÛT';
+															break;
+														case 9:
+															$moislib = 'SEPTEMBRE';
+															break;
+														case 10:
+															$moislib = 'OCTOBRE';
+															break;
+														case 11:
+															$moislib = 'NOVEMBRE';
+															break;
+														case 12:
+															$moislib = 'DECEMBRE';
+															break;
+													} ?>
+													<option value="<?php echo $month['mois'] ?>"> <?php echo $moislib ?> </option>
+											<?php }
+											} ?>
+										</select>
+									</div>
+									<div class='group'>
+										<label>Libelle :</label>
+										<input class="inputs" type="text" name="libelle">
+									</div>
+									<div class='group'>
+										<label>Date :</label>
+										<input value="<?php echo $today; ?>" class="inputs" type="date" name="date">
+									</div>
+									<div class='group'>
+										<label>Montant :</label>
+										<input class="inputs" type="text" name="mtn">
+									</div>
+									<input class='valider' name="login" type="submit" value="Valider">
 								</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -85,8 +180,26 @@ $user = $_SESSION['USER'];
 		</div>
 	</div>
 	</div>
-	<button class="deco"><a href="logout.php">Déconnection</a></button>
 	</div>
 </body>
+<script>
+	$(function() {
+		$('li').css('cursor', 'pointer')
+
+			.click(function() {
+				window.location = $('a', this).attr('href');
+				return false;
+			});
+	});
+
+	function moreinfo() {
+		var x = document.getElementById("usr-info");
+		if (x.style.display && x.style.display !== "none") {
+			x.style.display = "none";
+		} else {
+			x.style.display = "block";
+		}
+	}
+</script>
 
 </html>
