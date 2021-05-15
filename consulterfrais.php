@@ -1,12 +1,15 @@
 <?php
 session_start();
+error_reporting(0);
 include('/functions.php');
 $user = $_SESSION['USER'];
 $errmsg_arr = array();
 $errflag = false;
-
+if($_SESSION['USER']) {
 if (isset($_GET['date'])) {
     $date = $_GET['date'];
+} elseif(isset($_GET['mois'])) {
+    $date = $_GET['mois'];
 } else {
     $date = 1;
 }
@@ -71,6 +74,8 @@ $resultid->execute();
 $rowid = $resultid->fetch();
 $id = $rowid['id'];
 
+
+
 $sql1 = "SELECT idFraisForfait,libelle,quantite, montant, quantite*montant FROM `lignefraisforfait` JOIN fraisforfait on idFraisForfait = fraisforfait.id where idVisiteur=? AND mois=?";
 $result = $conn->prepare($sql1);
 $result->bindParam(1, $id);
@@ -88,6 +93,10 @@ $query = "SELECT * FROM visiteur WHERE login = '$user'";
 $sth = $conn->prepare($query);
 $sth->execute();
 $users = $sth->fetchAll();
+
+foreach ($users as $row => $user) {
+    $comptablecheck = $user['comptable'];
+}
 
 $sql3 = "SELECT * FROM fichefrais JOIN etat ON idEtat = etat.id WHERE idVisiteur= ? AND mois= ?";
 $result3 = $conn->prepare($sql3);
@@ -165,17 +174,13 @@ foreach ($etats as $etat) {
                         <li class="menu-item-active"><a href="consulterfrais.php"><i class="bi bi-file-earmark-spreadsheet-fill"></i>Consulter Frais</a></li>
                     </ul>
                 </div>
+                <?php if($comptablecheck == 0) {?>
                 <div class='consult'>
                     <div class="">
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="etat">
-                                        <h3>Etat de la fiche : <?= $etatfiche ?></h3>
-                                    </div>
-                                    <div class="titre">
-                                        <h2>CONSULTATION DE FRAIS FORFAIT DU MOIS DE <?= $month ?></h2>
-                                        <select class="month" name="date" onchange="location = this.value;">
+                                <select class="month" name="date" onchange="location = this.value;">
                                             <option disabled selected value> -- Mois -- </option>
                                             <option value="consulterfrais.php?date=1">Janvier</option>
                                             <option value="consulterfrais.php?date=2">Février</option>
@@ -190,6 +195,17 @@ foreach ($etats as $etat) {
                                             <option value="consulterfrais.php?date=11">Novembre</option>
                                             <option value="consulterfrais.php?date=12">Décembre</option>
                                         </select>
+                                        <?php if($rows == null && $rowhr == null) { ?>
+                                        <h3>Vous ne possédez pas une fiche pour le mois de <?=$month?></h3>
+                                        <?php } else { ?>
+                                    <div class="etat">
+                                        <h3>Etat de la fiche : <?= $etatfiche ?></h3>
+                                    </div>
+
+
+                                    <?php if($rows != null){?>
+                                    <div class="titre">
+                                        <h2>CONSULTATION DE FRAIS FORFAIT DU MOIS DE <?= $month ?></h2>
                                     </div>
                                     <table id="frais-forfait">
                                         <thead>
@@ -207,11 +223,16 @@ foreach ($etats as $etat) {
                                                 "</td>";
                                             if ($etatid == 'CR') {
                                                 echo "<td><a class='del' href='consulterfrais.php?type=delete&idfrais=" . $fraisfin['idFraisForfait'] . "&id=" . $id . "&mois=" . $date . "'><i class='bi bi-trash-fill'></i></a></td>";
+                                            } else {
+                                                echo "<td>Fiche ".$etatfiche."</td>";
                                             }
                                             echo "</tr>";
                                         }
                                         ?>
                                     </table>
+                                    <?php }else {?>
+                                    <h3>Vous n'avez pas renseignez de frais pour le mois de <?= $month ?></h3>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -221,6 +242,7 @@ foreach ($etats as $etat) {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="titre">
+                                    <?php if($rowhf != null) {?>
                                         <h2>CONSULTATION DE FRAIS HORS FORFAIT</h2>
                                     </div>
                                     <table id='frais-hors-forfait'>
@@ -234,15 +256,23 @@ foreach ($etats as $etat) {
                                         </thead>
                                         <?php
                                         foreach ($rowhf as $resulthf => $fraishffin) {
-                                            echo "<tr><td>" . $fraishffin['date'] . "</td><td>" . $fraishffin['libelle'] . "</td><td>" . $fraishffin['montant'] .
-                                                "</td><td><a class='del' href='consulterfrais.php?type=deletehf&idfrais=" . $fraishffin['id'] . "&id=" . $id . "&mois=" . $date . "'><i class='bi bi-trash-fill'></i></a></td></td></tr>";
+                                            echo "<tr><td>" . $fraishffin['date'] . "</td><td>" . $fraishffin['libelle'] . "</td><td>" . $fraishffin['montant']."</td>";
+                                            if ($etatid == 'CR') {   
+                                            echo "<td><a class='del' href='consulterfrais.php?type=deletehf&idfrais=" . $fraishffin['id'] . "&id=" . $id . "&mois=" . $date . "'><i class='bi bi-trash-fill'></i></a></td>";
+                                            } else {
+                                                echo "<td>Fiche ".$etatfiche."</td>";
+                                            }
+                                            echo "</tr>";
                                         }
-                                        ?>
+                                    } else {?>
+                                        <h3>Vous n'avez pas renseignez de frais hors forfait pour le mois de <?= $month ?></h3>
+                                    <?php } ?>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -269,5 +299,18 @@ foreach ($etats as $etat) {
         }
     }
 </script>
+<?php }else{ ?>
+    <div class="locksection">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h1><i class="bi bi-exclamation-triangle-fill"></i>Cet espace est reservé au visiteurs</h1>
+                <img class="lock" src="images/lock.png">
+            </div>
+        </div>
+    </div>
+<?php }
 
+}else { ?>
+    <h3>Veuillez Vous Connecter <a href="login.php">ici</a></h3>
+<?php } ?>
 </html>

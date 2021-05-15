@@ -1,16 +1,20 @@
 <?php
 session_start();
+error_reporting(0);
 include('/functions.php');
+date_default_timezone_set('Europe/Paris');
 $user = $_SESSION['USER'];
-if ($_GET) {
+if (isset($_GET['usr'])) {
 	$usr = $_GET['usr'];
+	$query1 = "SELECT * FROM fichefrais F JOIN visiteur V ON F.idVisiteur = V.id WHERE V.login = '$usr' AND F.idEtat = 'CR'";
+} else {
+	$query1 = "SELECT * FROM fichefrais F JOIN visiteur V ON F.idVisiteur = V.id WHERE V.login = '$user' AND F.idEtat = 'CR'";
 }
 $query = "SELECT * FROM visiteur WHERE login = '$user'";
 $sth = $conn->prepare($query);
 $sth->execute();
 $result = $sth->fetchAll();
 
-$query1 = "SELECT * FROM fichefrais F JOIN visiteur V ON F.idVisiteur = V.id WHERE V.login = '$user' AND F.idEtat = 'CR'";
 $sth1 = $conn->prepare($query1);
 $sth1->execute();
 $result1 = $sth1->fetchAll();
@@ -91,6 +95,10 @@ $today = $year . '-' . $month . '-' . $day;
 							<div class="row">
 								<div class="titre">
 									<h1>SAISIE DE FRAIS HORS FORFAIT</h1>
+									<?php
+									if ($_GET) {
+										echo $_GET['feedback'];
+									} ?>
 								</div>
 								<form class='input-form' method="POST" action="horsforfait.php">
 									<div class="group">

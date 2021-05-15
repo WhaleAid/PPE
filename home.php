@@ -1,7 +1,8 @@
 <?php
 session_start();
 include('/functions.php');
-// error_reporting(0);
+//error_reporting(0);
+date_default_timezone_set('Europe/Paris');
 $user = $_SESSION['USER'];
 if ($_GET) {
 	if ($_GET['user']) {

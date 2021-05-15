@@ -37,6 +37,9 @@ foreach ($rows as $usrconcerne) {
 	// set the PDO error mode to exception
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$sql = "INSERT INTO lignefraishorsforfait (idVisiteur, mois, libelle, date, montant) VALUES ('$id', '$mois', '$libelle', '$date', '$montant');";
-  $conn->exec($sql);
-  header('location: home-horsforfait.php');
-  exit();
+  if($conn->exec($sql)){
+	$feedback = '<h4 style="color : green; margin : auto">Insertion prise en compte</h4>';
+  } else {
+	$feedback = '<h4 style="color : red; margin : auto">Prolème d\'insertion</h4>';
+  }
+  header('location: home-horsforfait.php?feedback=' . $feedback);

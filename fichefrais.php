@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 $user = $_SESSION['USER'];
 $errmsg_arr = array();
 $errflag = false;
@@ -41,13 +42,13 @@ $query1 = "SELECT idEtat FROM fichefrais f JOIN visiteur v ON f.idVisiteur = v.i
 $sth1 = $conn->prepare($query1);
 $sth1->execute();
 $result1 = $sth1->fetchAll();
-
+$moisFiche=[];
 $query2 = "SELECT mois FROM fichefrais f JOIN visiteur v ON f.idVisiteur = v.id WHERE login = '$user'";
 $sth2 = $conn->prepare($query2);
 $sth2->execute();
 $result2 = $sth2->fetchAll();
 foreach ($result2 as $month) {
-	$moisFiche = $month['mois'];
+	array_push($moisFiche, $month['mois']);
 }
 
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -56,15 +57,23 @@ foreach ($result1 as $etat) {
 		$insert = 0;
 	}
 }
+$killswitch = 0;
+foreach($moisFiche as $monthfiche){
+	if($monthfiche == $mois){
+		$killswitch = 1;
+	}
+}
+
 if ($insert == 1) {
-	if ($moisFiche != $mois) {
+	if ($killswitch == 0) {
 		$sql = "INSERT INTO fichefrais (idVisiteur, mois, nbJustificatifs, dateModif, idEtat) VALUES ('$id', '$mois', '$nbrjust', '$date', 'CR')";
+		$feedback = '<h4 style="color : green; margin : auto">Insertion prise en compte</h4>';
 	} else {
 		$sql = "UPDATE fichefrais SET nbJustificatifs = '$nbrjust', dateModif = '$date' WHERE idVisiteur = '$id'";
+		$feedback = '<h4 style="color : green; margin : auto">Modification prise en compte</h4>';
 	}
 	$conn->exec($sql);
 	if ($conn) {
-		$feedback = '<h4 style="color : green; margin : auto">Insertion prise en compte</h4>';
 	} else {
 		$feedback = '<h4 style="color : red; margin : auto">Erreur d\'insertion</h4>';
 	}

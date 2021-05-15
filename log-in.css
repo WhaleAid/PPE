@@ -65,7 +65,6 @@ label[for="showpassword"] {
   position: relative;
 }
 
-
 /* active state */
 input:focus ~ label:not([for="showpassword"]),
 input:valid ~ label:not([for="showpassword"]) {
@@ -300,9 +299,9 @@ input:focus ~ .highlight {
   float: left;
 }
 .logo-login {
-    padding-top: 0.7em;
-    width: 40%;
-    margin: auto;
+  padding-top: 0.7em;
+  width: 40%;
+  margin: auto;
 }
 
 .login-form2 h1 {
@@ -347,9 +346,9 @@ input:focus ~ .highlight {
     width: 280px;
     border-color: #2ecc71;
 } */
-.section-header-login{
-    justify-content: center;
-    display: grid;
+.section-header-login {
+  justify-content: center;
+  display: grid;
 }
 
 .section-header {
@@ -575,4 +574,49 @@ body {
   color: white;
   background-color: #ff160e;
   padding: 2px;
+  text-align: center;
+}
+
+.logorecover {
+  width: 5em;
+  height: auto;
+  margin-right: 1em;
+}
+
+.text-danger {
+  font-size: 1em;
+  color: red;
+}
+
+.text-success {
+  font-size: 1em;
+  color: green;
+}
+
+#recover {
+  margin: auto;
+  padding: auto;
+  background-color: #000000;
+  width: 50%;
+  align-items: center;
+}
+
+#recover form {
+  width: 25%;
+  display: block;
+}
+
+#recover form > input {
+  margin-top: 2em;
+}
+
+#recover form > input[name='submit-reset']{
+  width: 80%;
+  text-align: center;
+  padding: auto;
+}
+
+.recover-heading{
+  margin-top: 2em;
+  display: flex;
 }

@@ -30,6 +30,22 @@ body {
   width: 25em !important;
 }
 
+.userpick{
+  display: block;
+}
+
+.userform{
+  display: flex;
+}
+
+.userform label{
+  margin: auto;
+}
+
+.userform select {
+  margin: auto 1em !important;
+}
+
 .titre {
   text-align: left;
   display: flex;
@@ -302,32 +318,42 @@ select:not(.month) {
   text-decoration: none;
 }
 
-#frais-forfait, #frais-hors-forfait {
+#frais-forfait, #frais-hors-forfait, #frais-recap {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
 #frais-forfait td, #frais-hors-forfait td,
-#frais-forfait th, #frais-hors-forfait th {
+#frais-forfait th, #frais-hors-forfait th
+#frais-recap th, #frais-recap td {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#frais-forfait tr:nth-child(even), #frais-hors-forfait tr:nth-child(even) {
+#frais-forfait tr:nth-child(even), #frais-hors-forfait tr:nth-child(even), #frais-recap tr:nth-child(even){
   background-color: #f2f2f2;
 }
 
-#frais-forfait tr:hover, #frais-hors-forfait tr:hover {
+#frais-forfait tr:hover, #frais-hors-forfait tr:hover, #frais-recap tr:hover {
   background-color: #ddd;
 }
 
-#frais-forfait th, #frais-hors-forfait th {
+#frais-forfait th, #frais-hors-forfait th, #frais-recap th {
   padding-top: 12px;
   padding-bottom: 12px;
+  padding-left: 1em;
   text-align: left;
   background-color: #3888f1;
   color: white;
+}
+
+#frais-recap input[type='submit'] {
+  padding: 15px;
+  background-color: green;
+  border: none;
+  color: white;
+  border-radius: 24px;
 }
 
 .user-info {
@@ -394,3 +420,33 @@ select:not(.month) {
 ::-webkit-scrollbar-thumb:hover {
   background: #eee; 
 }
+
+.bottom-section {
+  display: flex;
+  margin: 2em auto 1em auto;
+}
+
+.btns input{
+  border-radius: 0% !important;
+}
+
+.btns input:hover{
+  background-color: #3888f1;
+  color: white;
+}
+
+.lock {
+  opacity: .5;
+  align-items: center;
+  height: 300px;
+  width: auto;
+}
+
+.lock:hover {
+  opacity: .8;
+}
+
+.locksection{
+  width: 79.2%;
+}
+

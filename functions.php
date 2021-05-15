@@ -10,17 +10,18 @@ function register($tab)
     $result = $conn->prepare($sql);
     $result->execute();
 }
-function deleteFrais($tab){
+function deleteFrais($tab)
+{
     global $conn;
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "UPDATE `lignefraisforfait` SET `quantite` = 0 WHERE `lignefraisforfait`.`idVisiteur` = '$tab[0]' AND `lignefraisforfait`.`mois` = '$tab[1]' AND `lignefraisforfait`.`idFraisForfait` = '$tab[2]'";
     // use exec() because no results are returned
     $result = $conn->prepare($sql);
     $result->execute();
-
 }
 
-function deleteFraishf($tab){
+function deleteFraishf($tab)
+{
     global $conn;
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "DELETE FROM `lignefraishorsforfait` WHERE `lignefraishorsforfait`.`idVisiteur` = '$tab[0]' AND `lignefraishorsforfait`.`mois` = '$tab[1]' AND `lignefraishorsforfait`.`id` = '$tab[2]'";
@@ -28,3 +29,52 @@ function deleteFraishf($tab){
     $result = $conn->prepare($sql);
     $result->execute();
 }
+function RembourserFiche($tab)
+{
+    global $conn;
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "UPDATE fichefrais SET idEtat = 'RB' WHERE idVisiteur=? AND mois=?";
+    $result = $conn->prepare($sql);
+    $result->bindParam(1, $tab[0]);
+    $result->bindParam(2, $tab[1]);
+    $result->execute();
+}
+
+function ValiderFiche($tab)
+{
+    global $conn;
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "UPDATE fichefrais SET idEtat = 'VA', dateModif =?, montantValide=? WHERE idVisiteur=? AND mois=?";
+    $result = $conn->prepare($sql);
+    $result->bindParam(1, $tab[3]);
+    $result->bindParam(2, $tab[2]);
+    $result->bindParam(3, $tab[0]);
+    $result->bindParam(4, $tab[1]);
+    $result->execute();
+}
+
+function CloturerFiche($tab)
+{
+    global $conn;
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "UPDATE fichefrais SET idEtat = 'CL' WHERE idVisiteur=? AND mois=?";
+    $result = $conn->prepare($sql);
+    $result->bindParam(1, $tab[0]);
+    $result->bindParam(2, $tab[1]);
+    $result->execute();
+}
+
+function OuvrirFiche($tab)
+{
+    global $conn;
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "UPDATE fichefrais SET idEtat = 'CR' WHERE idVisiteur=? AND mois=?";
+    $result = $conn->prepare($sql);
+    $result->bindParam(1, $tab[0]);
+    $result->bindParam(2, $tab[1]);
+    $result->execute();
+}
+
+
+
+
